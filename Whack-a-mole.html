@@ -1,0 +1,286 @@
+<html>
+<head>
+    
+<style>
+    h1{
+        font-family: Helvetica;
+        text-align: center;
+        font-size: 50px;
+        font-weight: normal;
+        margin:0px;
+        margin-top: 50px;
+    }
+    
+    .box{
+        border:2px solid black;
+        position: fixed;
+        width:700px;
+        height:700px;
+        left:50%;
+        top:50%;
+           
+        
+        transform: translate(-50%, -50%);
+        
+        border-radius: 12.5%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .box2{
+        display: inline;
+        width:700px;
+        height:700px;
+/*        justify-content: space-between;*/
+    }
+    
+    .innerbox{
+        border:1px solid black;
+        position:relative;
+        
+        height:600px;
+        width:600px;
+        
+        
+       
+        font-size: 60px;
+        margin:0;
+        
+/*
+        align-items: center;
+        transform: translate(-50%, -50%);
+*/
+    }
+    
+    .item{
+        border:12px solid #844204;
+        height:25%;
+        width:25%;
+        text-align: center;
+        font-size: 50px;
+        margin:10px;
+        
+        border-radius: 50%;
+        outline: none;
+        background-color: #3f1d0b;
+        cursor: pointer;
+        object-fit: cover;
+        background-size: 300%;
+        
+
+        
+    }
+    
+    #start{
+        box-shadow: 0px 0px 15px 1px grey ;
+        cursor: pointer;
+        padding: 15px 25px;
+        font-size: 24px;
+        text-align: center;
+        border-radius: 25px;
+        
+        position: fixed;
+        left:40%;
+        top:92%;
+           
+        
+        transform: translate(-50%, -50%);
+        
+        
+    }
+    
+    #start:hover{
+        background-color: #cdcdcd ;
+    }
+    
+     #stop{
+        box-shadow: 0px 0px 15px 1px grey ;
+        cursor: pointer;
+        padding: 15px 25px;
+        font-size: 24px;
+        text-align: center;
+        border-radius: 25px;
+        
+        position: fixed;
+        left:60%;
+        top:92%;
+           
+        
+        transform: translate(-50%, -50%);
+        
+        
+    }
+    
+    #stop:hover{
+        background-color: #cdcdcd ;
+    }
+    
+    #score{
+        font-family: Helvetica;
+        text-align: center;
+        font-size: 30px;
+        font-weight: normal;
+        margin:0px;
+        margin-top: 50px;
+        
+        position: fixed;
+        left:83%;
+        top:25%;
+        transform: translate(-50%, -50%);
+    }
+    
+    #highscore{
+        font-family: Helvetica;
+        text-align: center;
+        font-size: 30px;
+        font-weight: normal;
+        margin:0px;
+        margin-top: 50px;
+        
+        position: fixed;
+        left:83%;
+        top:35%;
+        transform: translate(-50%, -50%);
+    }
+    #highscore1{
+        font-family: Helvetica;
+        text-align: center;
+        font-size: 30px;
+        font-weight: normal;
+        margin:0px;
+        margin-top: 50px;
+        
+        position: fixed;
+        left:88%;
+        top:35%;
+        transform: translate(-50%, -50%);
+    }
+</style>    
+</head>    
+    
+    
+    
+<body>
+    
+    <h1>Whack-a-mole Game</h1>
+    
+<div class="box">
+    
+    <button class="item" id="1" onclick="Clicked(id)"></button>
+    <button class="item" id="2" onclick="Clicked(id)"></button>
+    <button class="item" id="3" onclick="Clicked(id)"></button>
+    <button class="item" id="4" onclick="Clicked(id)"></button>
+    <button class="item" id="5" onclick="Clicked(id)"></button>
+    <button class="item" id="6" onclick="Clicked(id)"></button>
+    <button class="item" id="7" onclick="Clicked(id)"></button>
+    <button class="item" id="8" onclick="Clicked(id)"></button>
+    <button class="item" id="9" onclick="Clicked(id)"></button>
+    
+</div>  
+    
+<!--
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+-->
+    <span id="score">Your Score:0</span>
+    <span id="highscore">High Score:0</span>
+  
+    <button id="start" onclick=Start()>Start Game</button>
+    <button id="stop" onclick="Reset()">Stop Game</button>
+  
+    
+<script>
+    var pid;
+    var randomid;
+    var score=0;
+    var highscore=0
+    
+    function Reset()
+    {
+        score=0
+        Clear()
+        clearInterval(pid)
+        document.getElementById('score').innerText="Your Score:"+score;
+        
+//        scoretag.innerText=
+        
+    }
+    
+    function Start()
+    {
+        pid=setInterval(Change,Math.floor(Math.random(1000,4000)*3001)+1000)
+    }
+    
+    function Stop()
+    {
+        score=0
+        
+          
+    }
+    
+    function Change()
+    {
+            Clear()
+        
+            randomid=Math.floor(Math.random(1,10)*10)+1
+            console.log(randomid)
+        
+            var button=document.getElementById(randomid)
+        
+            button.style.backgroundImage="url('mole.jpg')"
+            button.style.backgroundRepeat="no-repeat"
+            button.style.backgroundPosition="50% 50%"
+            
+        
+    }
+    
+    function Clicked(id)
+    {
+        if(randomid==id)
+            {
+                score++;
+                
+                var scoretag= document.getElementById('score')
+                var highscoretag= document.getElementById('highscore')
+                scoretag.innerText="Your Score:"+score;
+        
+                var button=document.getElementById(randomid)
+                button.style.backgroundImage="url('hit.png')"
+                button.style.backgroundRepeat="no-repeat"
+                button.style.backgroundPosition="50% 50%"
+                
+                
+//                background-size: 300%;
+                
+                if (highscore<score)
+                highscore=score
+                highscoretag.innerText="High Score:"+score;
+            }
+        
+        
+    }
+    function Clear()
+    {
+        var buttons=document.getElementsByTagName("button");
+        for (var i=0;i<=9;i++)
+            {
+                buttons[i].style.backgroundImage="none"
+            }
+    }
+    
+</script>
+    
+</body>
+
+
+
+
+</html>
